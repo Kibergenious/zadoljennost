@@ -1,0 +1,64 @@
+package com.company;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayBubble array = new ArrayBubble(10); //Создаем массив array на 10 элементов
+
+        array.into(3);       //заполняем массив
+        array.into(48);
+        array.into(92);
+        array.into(1);
+        array.into(894);
+        array.into(94);
+        array.into(4);
+        array.into(100000);
+        array.into(36);
+        array.into(9999);
+
+        array.printer();            //выводим элементы до сортировки
+        array.bubbleSorter();       //используем пузырьковую сортировку
+        array.printer();            //снова выводим отсортированный список
+    }
+}
+class ArrayBubble {
+        private long[] a;   //ссылка на массив
+        private int d;  //количество элементов в массиве
+
+        public ArrayBubble(int max) {    //конструктор класса
+            a = new long[max];          //создание массива размером max
+            d = 0;                  //при создании массив содержит 0 элементов
+        }
+
+        public void into(long value) {   //метод вставки элемента в массив
+            a[d] = value;           //вставка value в массив a
+            d++;                    //размер массива увеличивается
+        }
+
+        public void printer() {          //метод вывода массива в консоль
+            for (int i = 0; i < d; i++) {    //для каждого элемента в массиве
+                System.out.print(a[i] + " ");   //вывести в консоль
+                System.out.println("");         //с новой строки
+            }
+            System.out.println();    //Окончание вывода массива
+        }
+
+        private void toSwap(int first, int second) { //метод меняет местами пару чисел массива
+            long x = a[first];      //во временную переменную помещаем первый элемент
+            a[first] = a[second];       //на место первого ставим второй элемент
+            a[second] = x;          //вместо второго элемента пишем первый из временной памяти
+        }
+
+        public void bubbleSorter() {     //МЕТОД ПУЗЫРЬКОВОЙ СОРТИРОВКИ
+            for (int out = d - 1; out >= 1; out--) {  //Внешний цикл
+                for (int in = 0; in < out; in++) {       //Внутренний цикл
+                    if (a[in] > a[in + 1])               //Если порядок элементов нарушен
+                        toSwap(in, in + 1);             //вызвать метод, меняющий местами
+                }
+            }
+        }
+    }
+// так же что я выяснил о многих методах, которые тут используются
+// bubbleSorter сортирует данные, хранящиеся в массиве
+// toSwap меняет местами элементы, если они стоят не в нужном порядке( берется два числа, в переменную записываеся значение первого, а на место первого второе, потом на место второго пишется значение переменной)
+//into метод вставки элемента в массив
+//printer  выводит элементы массива построчно
